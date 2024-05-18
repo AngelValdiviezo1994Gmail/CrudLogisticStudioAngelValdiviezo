@@ -7,7 +7,7 @@ using Module.Security.Domain.Entities;
 using Module.Security.Infraestructure.Interfaces.Client;
 using Newtonsoft.Json;
 using NuGet.Protocol;
-using System.Web.WebPages;
+//using System.Web.WebPages;
 
 namespace WebAPP.Filters
 {
