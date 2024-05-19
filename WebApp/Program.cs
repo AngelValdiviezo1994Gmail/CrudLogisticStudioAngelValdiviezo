@@ -14,6 +14,7 @@ CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
+builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -30,6 +31,7 @@ builder.Services.Configure<RouteOptions>(options =>
 {
     options.ConstraintMap.Add("apiVersion", typeof(ApiVersionRouteConstraint));
 });
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -45,7 +47,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

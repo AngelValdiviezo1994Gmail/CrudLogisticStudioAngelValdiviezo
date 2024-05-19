@@ -1,4 +1,5 @@
-﻿using AngelValdiviezoWebApi.Application.Features.Cliente.Dto;
+﻿using AngelValdiviezoWebApi.Application.Common.Wrappers;
+using AngelValdiviezoWebApi.Application.Features.Cliente.Dto;
 using AngelValdiviezoWebApi.Application.Features.Token.Dto;
 using AngelValdiviezoWebApi.Domain.Entities;
 using AngelValdiviezoWebApi.Domain.Enums;
@@ -60,7 +61,8 @@ namespace WebApp.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var responseData = await response.Content.ReadAsStringAsync();
-                LstClientes = JsonConvert.DeserializeObject<List<ClienteType>>(responseData);
+                //LstClientes = JsonConvert.DeserializeObject<List<ClienteType>>(responseData);
+                LstClientes = JsonConvert.DeserializeObject<ResponseType<List<ClienteType>>>(responseData).Data;
 
             }
 

@@ -25,7 +25,6 @@ namespace WebApp.Services
             {
                 string Ruta = string.Concat(_Conexion.Puerto, _Conexion.ApiToken, "CreateToken");
 
-                //var response = await _httpClient.PostAsync("https://localhost:7203/api/v1/Token/CreateToken", content);
                 var response = await _httpClient.PostAsync(Ruta, content);
 
                 return response;

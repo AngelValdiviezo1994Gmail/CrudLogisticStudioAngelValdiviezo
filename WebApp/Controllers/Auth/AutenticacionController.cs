@@ -8,6 +8,7 @@ using WebApp.Controllers;
 using AngelValdiviezoWebApi.Domain.Constant;
 using WebApp.Services;
 using Microsoft.AspNetCore.Http;
+using AngelValdiviezoWebApi.Application.Common.Wrappers;
 
 namespace WebAppCrudAngelValdiviezo.Controllers.Auth
 {
@@ -39,9 +40,9 @@ namespace WebAppCrudAngelValdiviezo.Controllers.Auth
                 if (response.IsSuccessStatusCode)
                 {
                     var responseData = await response.Content.ReadAsStringAsync();
-                    var resultModel = JsonConvert.DeserializeObject<TokenType>(responseData);
+                    var resultModel = JsonConvert.DeserializeObject<ResponseType<string>>(responseData);
                     
-                    HttpContext.Session.SetString("JwtSesion", resultModel.Token);
+                    HttpContext.Session.SetString("JwtSesion", resultModel.Data);
 
                     return RedirectToAction(nameof(Index), RemoveController(nameof(HomeController))); //Enviamos a HOME
                 }

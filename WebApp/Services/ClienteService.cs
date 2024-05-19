@@ -22,10 +22,10 @@ namespace WebApp.Services
         {
             try
             {
-                string Ruta = string.Concat(_Conexion.Puerto, _Conexion.ApiCliente, "CreateToken");
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer ", token);
+                string Ruta = string.Concat(_Conexion.Puerto, _Conexion.ApiCliente, "GetClientes");
 
-                //var response = await _httpClient.PostAsync("https://localhost:7203/api/v1/Token/CreateToken", content);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
                 var response = await _httpClient.GetAsync(Ruta);
 
                 return response;
