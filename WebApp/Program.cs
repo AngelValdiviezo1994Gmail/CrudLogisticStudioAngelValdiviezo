@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Routing;
 using System.Globalization;
+using WebApp.Configurations.Interfaces;
+using WebApp.Configurations.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,8 @@ CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddDistributedMemoryCache();
+
+//builder.Services.AddScoped<IExecutionOrchestrator, ExecutionOrchestrator>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

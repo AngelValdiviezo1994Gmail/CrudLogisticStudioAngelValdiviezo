@@ -1,10 +1,23 @@
 ﻿@using AngelValdiviezoWebApi.Application.Features.Cliente.Dto;
+@using AngelValdiviezoWebApi.Domain.Entities;
 @using WebApp.ViewModel;
 @using System.Reflection;
-@model List<ClienteType>;
+@using WebApp.ViewModel;
+@model ResponsePaged<List<ClienteListViewModel>>;
 
 @{
     ViewData["Title"] = "Home Page";
+}
+
+
+@section BodyHeader{
+    <div class="flex-column w-100">
+        <div class="d-flex flex-row w-100  justify-content-between">            
+            <div class="d-flex flex-row w-100 justify-content-end">
+                <a asp-action="Create" class="btn btn-outline-primary">+ Agregar</a>
+            </div>
+        </div>
+    </div>
 }
 
 @{

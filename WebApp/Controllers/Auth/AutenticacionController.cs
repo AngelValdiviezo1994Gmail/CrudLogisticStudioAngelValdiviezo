@@ -44,7 +44,7 @@ namespace WebAppCrudAngelValdiviezo.Controllers.Auth
                     
                     HttpContext.Session.SetString("JwtSesion", resultModel.Data);
 
-                    return RedirectToAction(nameof(Index), RemoveController(nameof(HomeController))); //Enviamos a HOME
+                    return RedirectToAction(nameof(Index), RemoveController(nameof(HomeController)));
                 }
                 else
                 {
