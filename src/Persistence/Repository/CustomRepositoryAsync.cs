@@ -1,11 +1,6 @@
 ﻿using AngelValdiviezoWebApi.Application.Common.Interfaces;
 using AngelValdiviezoWebApi.Persistence.Contexts;
 using Ardalis.Specification.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AngelValdiviezoWebApi.Persistence.Repository
 {

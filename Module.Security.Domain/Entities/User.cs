@@ -1,6 +1,4 @@
-﻿using Common.Domain.Entities.Persistence;
-using Common.Domain.Entities.Persistence.Batallon;
-
+﻿
 namespace Module.Security.Domain.Entities
 {
     public class User
@@ -37,20 +35,7 @@ namespace Module.Security.Domain.Entities
         public int? UsuLugarExpedicionDocId { get; set; }
         public int? UsuDepartamentoExpedicionDocId { get; set; }
         public string? UsuDireccionPersonal { get; set; }
-        public List<Rol>? Roles { get; set; }
-        public List<Escuela>? Escuelas { get; set; }
-        public EstudianteEvaluador? idEval { get; set; }
-        public Matricula? matricula { get; set; }
-        public Estudiante? estudiante { get; set; } //Continuar aqui
-        public CursoAcademico? curso { get; set; }
-        public Ciudad? Ciudad { get; set; }
-        public Genero? Genero { get; set; }
-        public TipoDocumento? TipoDocumento { get; set; }
-        public  EstadoCivil? EstadoCivil{ get; set; } = null!;
-        public  Estrato? Estrato { get; set; }
-        public  CatGrupoRh? GrupoRH { get; set; }
-        public  CatDepartamento? DepartamentoExpicionDoc { get; set; }
-
+      
         public Boolean AlreadyActivated { get; set; }
         public Boolean ConfirmToken { get; set; }
         public Boolean ChangePwd { get; set; }

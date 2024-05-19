@@ -12,10 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common.Domain\Common.Domain.csproj" />
-    <ProjectReference Include="..\Common.Infraestructure\Common.Infraestructure.csproj" />
-    <ProjectReference Include="..\Module.Security.Domain\Module.Security.Domain.csproj" />
-    <ProjectReference Include="..\Module.Security.Infraestructure\Module.Security.Infraestructure.csproj" />
+    <ProjectReference Include="..\src\AngelValdiviezoWebApi\AngelValdiviezoWebApi.csproj" />
   </ItemGroup>
 
 </Project>

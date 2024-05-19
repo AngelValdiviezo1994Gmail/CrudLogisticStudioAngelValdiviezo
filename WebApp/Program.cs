@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc.Routing;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,7 @@ CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddHttpClient();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -22,6 +23,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true;
         options.LoginPath = "/Autenticacion/Login";
     });
+
+
+// Registrar la restricción de versionado de la API
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.ConstraintMap.Add("apiVersion", typeof(ApiVersionRouteConstraint));
+});
 
 var app = builder.Build();
 

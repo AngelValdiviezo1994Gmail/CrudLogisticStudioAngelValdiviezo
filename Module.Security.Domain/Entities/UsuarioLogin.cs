@@ -1,12 +1,4 @@
-﻿using Common.Domain.Entities.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace Module.Security.Domain.Entities
+﻿namespace Module.Security.Domain.Entities
 {
     public class UsuarioLogin
     {
@@ -25,8 +17,5 @@ namespace Module.Security.Domain.Entities
         public string? TokenRecover2fa { get; set; }
         public bool Active { get; set; }
 
-        public bool Dupper { get; set; }
-        public int? EscId { get; set; }
-        public Escuela? Escuela { get; set; }
     }
 }

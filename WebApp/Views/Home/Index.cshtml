@@ -1,8 +1,48 @@
-﻿@{
+﻿@using WebApp.ViewModel;
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Bienvenido</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+@{
+    List<OpcionTablaViewModel> opciones = new()
+    {
+        new OpcionTablaViewModel{
+            Accion = "VerDetalle",
+            ClassBoton = "btn btn-outline-success",
+            PropiedadId  = "Id",
+            Icono = "la la-binoculars"
+        },
+        new OpcionTablaViewModel{
+            Accion = "Edit",
+            ClassBoton = "btn btn-outline-primary",
+            PropiedadId = "Id",
+            Icono = "la la-pencil"
+        },
+        new OpcionTablaViewModel{
+            Accion = "Delete",
+            jAction = "ConfirmarEliminarItem",
+            controlType = ControlTypeEnum.button,
+            ClassBoton = "btn btn-outline-danger",
+            PropiedadId  = "Id",
+            DescItem="EstCivDescripcion",
+            Icono = "la la-trash-o"
+        }
+    };
+}
+
+@await Component.InvokeAsync(
+    "Table",
+    new {
+        datos = Model,
+        opciones = opciones ,
+        mostrarFiltros = true,
+        esOrdenable = true,
+        paginacion = true,
+        mostrarBusqueda = true,
+    })

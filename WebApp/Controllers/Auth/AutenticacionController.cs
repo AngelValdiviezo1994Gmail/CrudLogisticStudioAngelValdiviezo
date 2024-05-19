@@ -1,29 +1,22 @@
-﻿using Common.Domain.Wrappers;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebAppCrudAngelValdiviezo.Extensions;
 using WebAppCrudAngelValdiviezo.ViewModel.Auth;
-using Common.Domain.Interfaces;
-using Module.Security.Infraestructure.Interfaces.Client;
-using Module.Security.Infraestructure.DTO;
+using Newtonsoft.Json;
+using System.Text;
+using AngelValdiviezoWebApi.Application.Features.Token.Dto;
 using WebApp.Controllers;
 
 namespace WebAppCrudAngelValdiviezo.Controllers.Auth
 {
     public class AutenticacionController : BaseController
     {
-        private readonly IAutenticacionClient _autenticacionClient;
-        private readonly IExecutionOrchestrator _executionOrchestrator;
+        private readonly HttpClient _httpClient;
 
-        public AutenticacionController(IAutenticacionClient autenticacionClient, IExecutionOrchestrator executionOrchestrator)
+        public AutenticacionController(HttpClient httpClient)
         {
-            _autenticacionClient = autenticacionClient;
-            _executionOrchestrator = executionOrchestrator;
+            _httpClient = httpClient;
         }
-
+        
         public async Task<ActionResult> Login()
         {
             return View();
@@ -32,28 +25,32 @@ namespace WebAppCrudAngelValdiviezo.Controllers.Auth
         [HttpPost]
         public async Task<ActionResult> Login(LoginViewModel login)
         {
-            if (ModelState.IsValid)
+            var json = JsonConvert.SerializeObject(login);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
             {
-                var loginDTO = _executionOrchestrator.Mapper.Map<LoginRequestDTO>(login);
-                var response = await _autenticacionClient.Loggin(new Request<LoginRequestDTO>(loginDTO));
+                var response = await _httpClient.PostAsync("https://localhost:7203/api/v1/Token/CreateToken", content);
 
-                if (response.Succeeded && response.Data != null)
+                if (response.IsSuccessStatusCode)
                 {
-                    MensajeNotificaciones(new ConfiguracionMensaje { TipoMensaje = TipoMensaje.success.ToString(), Titulo = "BIENVENIDO/A ", Mensaje = response?.Data.UsuNombreCompleto ?? string.Empty });
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    var resultModel = JsonConvert.DeserializeObject<TokenType>(responseData);
 
-                    return RedirectToAction(nameof(Index), RemoveController(nameof(HomeController)));
+                    return RedirectToAction(nameof(Index), RemoveController(nameof(HomeController))); //Enviamos a HOME
                 }
                 else
                 {
-                    MensajeNotificaciones(new ConfiguracionMensaje { TipoMensaje = TipoMensaje.error.ToString(), Titulo = "ERROR LOGIN", Mensaje = $"Error {response.ErrorCode} - {response.Error}" });
-                    return RedirectToAction(nameof(Login));
+                    // Manejar el error
+                    return StatusCode((int)response.StatusCode, response.ReasonPhrase);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction(nameof(Login));
+                // Manejar la excepción
+                return StatusCode(500, ex.Message);
             }
-
+            
         }
 
 

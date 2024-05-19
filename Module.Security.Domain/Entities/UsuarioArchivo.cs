@@ -10,7 +10,5 @@
         public string Genero { get; set; }
         public string EstadoCivil { get; set; }
         public string Ciudad { get; set; }
-        public List<RolesPorUsuario> rolesUsuario { get; set; }
-        public List<UsuarioEscuela> usuarioEnEscuela { get; set; }
     }
 }

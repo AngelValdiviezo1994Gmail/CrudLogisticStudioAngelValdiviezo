@@ -1,12 +1,5 @@
-﻿using Common.Domain.Entities;
-using Common.Domain.Interfaces;
-using Common.Domain.Wrappers;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Module.Security.Domain.Entities;
-using Module.Security.Infraestructure.Interfaces.Client;
-using Newtonsoft.Json;
-using NuGet.Protocol;
 //using System.Web.WebPages;
 
 namespace WebAPP.Filters
@@ -43,25 +36,16 @@ namespace WebAPP.Filters
             bool continuar = false;
             if (Guid.TryParse(sessionId, out Guid _sessionId))
             {
-                var sessionClient = context.HttpContext.RequestServices.GetService<ISessionClient>();
-                Response<DatosSession> datosSession = await sessionClient.GetSession(new Request<Guid>(_sessionId));
-                if (datosSession != null)
-                {
-                    if (datosSession.Data.FechaExpiracion > DateTime.UtcNow)
-                    {
-                        var sesionHelper = context.HttpContext.RequestServices.GetService<ISesionHelper>();
-                        var objdata = datosSession.Data;
-                        
-                        sesionHelper.SetDatos(objdata);
-                        continuar = true;
-                    }
-                }
+            //    var sessionClient = context.HttpContext.RequestServices.GetService<ISessionClient>();
+            
             }
 
             if (!continuar)
             {
+                /*
                 var sesionHelper = context.HttpContext.RequestServices.GetService<ISesionHelper>();
                 sesionHelper.SetDatos(null);
+                */
                 context.Result = new RedirectToRouteResult(
                   new RouteValueDictionary()
                   {

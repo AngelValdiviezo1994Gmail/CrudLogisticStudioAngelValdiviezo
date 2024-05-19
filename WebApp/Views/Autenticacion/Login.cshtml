@@ -15,17 +15,19 @@
 
                 <form asp-action="Login" id="frmLogin">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
                     <div class="form-group">
-                        <label asp-for="usuario" class="control-label font-weight-bolder"></label>
-                        <input asp-for="usuario" type="text" class="form-control" placeholder="Ingrese usuario" autocomplete="off">
-                        <span asp-validation-for="usuario" class="text-danger"></span>
+                        <label asp-for="Identificacion" class="control-label font-weight-bolder"></label>
+                        <input asp-for="Identificacion" type="text" class="form-control" placeholder="Ingrese usuario" autocomplete="off">
+                        <span asp-validation-for="Identificacion" class="text-danger"></span>
                     </div>
+                    
                     <div class="form-group">
-                        <label asp-for="clave" class="control-label font-weight-bolder"></label>
+                        <label asp-for="password" class="control-label font-weight-bolder"></label>
                         <div class="input-group">
-                            <input asp-for="clave" class="form-control" placeholder="Ingrese contraseña" type="password" autocomplete="current-password" id="id_password"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i></span></span>
+                            <input asp-for="password" class="form-control" placeholder="Ingrese contraseña" type="password" autocomplete="current-password" id="id_password"> <span class="input-group-append"><span class="input-group-text"><i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i></span></span>
                         </div>
-                        <span asp-validation-for="clave" class="text-danger"></span>
+                        <span asp-validation-for="password" class="text-danger"></span>
                     </div>
 
 

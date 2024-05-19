@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Module.Security.Infraestructure.Interfaces.Client;
+//using Module.Security.Infraestructure.Interfaces.Client;
 using System.Diagnostics;
 using WebApp.Models;
 using WebAPP.Filters;
@@ -9,12 +9,10 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IAutenticacionClient _autenticacionClient;
-
-        public HomeController(ILogger<HomeController> logger, IAutenticacionClient autenticacionClient)
+        
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _autenticacionClient = autenticacionClient;
         }
 
         public IActionResult Index()

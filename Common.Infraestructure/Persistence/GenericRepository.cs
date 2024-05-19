@@ -7,13 +7,12 @@ using System.Linq.Expressions;
 using Common.Domain.Extensiones;
 using Microsoft.EntityFrameworkCore.Query;
 using AutoMapper.Execution;
-using MailKit.Search;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using DevExpress.Xpo.DB.Helpers;
+
 
 namespace Common.Infrastructure.Persistence
 {
-
+    /*
     public class GenericRepository<TDomain, TEntity> : IGenericRepository<TDomain> where TDomain : class where TEntity : class
     {
         private readonly IDbContextFactory<ApplicationContext> _contextFactory;
@@ -937,6 +936,7 @@ namespace Common.Infrastructure.Persistence
         #endregion
 
     }
+*/
 }
 
 public static class LinqExtensions
