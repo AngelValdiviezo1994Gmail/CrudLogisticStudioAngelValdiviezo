@@ -35,6 +35,14 @@ namespace WebAppCrudAngelValdiviezo.Controllers.Auth
 
             try
             {
+                if(string.IsNullOrEmpty(login.Identificacion)
+                    || login.Identificacion.ToLower() != "angelvaldiviezo"
+                    || string.IsNullOrEmpty(login.password)
+                    || login.password.ToLower() != "1234567")
+                {
+                    return StatusCode(505, "Contraseñas incorrectas");
+                }
+
                 var response = await OAuthService.Login(login);
 
                 if (response.IsSuccessStatusCode)
@@ -48,7 +56,6 @@ namespace WebAppCrudAngelValdiviezo.Controllers.Auth
                 }
                 else
                 {
-                    // Manejar el error
                     return StatusCode((int)response.StatusCode, response.ReasonPhrase);
                 }
             
