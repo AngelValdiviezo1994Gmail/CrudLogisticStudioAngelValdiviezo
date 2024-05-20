@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AngelValdiviezoWebApi.Domain.Entities.Catalogo.TipoCliente
 {
-    [Table("tblTipoClienteKrugger", Schema = "dbo")]
+    [Table("tblTipoClienteLogisticStudio", Schema = "dbo")]
     public class TipoClienteModels
     {
         [Column("TpCl_Id", Order = 0, TypeName = "int")]

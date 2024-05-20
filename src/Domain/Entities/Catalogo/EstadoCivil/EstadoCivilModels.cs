@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AngelValdiviezoWebApi.Domain.Entities.Catalogo.EstadoCivil
 {
-    [Table("tblEstadoCivilKrugger", Schema = "dbo")]
+    [Table("tblEstadoCivilLogisticStudio", Schema = "dbo")]
     public class EstadoCivilModels
     {
         [Column("EstCiv_Id", Order = 0, TypeName = "int")]

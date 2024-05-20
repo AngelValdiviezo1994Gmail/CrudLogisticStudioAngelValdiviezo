@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AngelValdiviezoWebApi.Domain.Entities.Cliente
 {
-    [Table("tblClienteKrugger", Schema = "dbo")]
+    [Table("tblClienteLogisticStudio", Schema = "dbo")]
     public class ClienteModels
     {
         [Column("idCliente", Order = 0, TypeName = "int")]

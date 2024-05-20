@@ -73,16 +73,21 @@ namespace WebApp.Controllers
                 
                 LstClientes = JsonConvert.DeserializeObject<ResponseType<List<ClienteType>>>(responseData).Data;
 
+                if(LstClientes == null)
+                {
+                    LstClientes = new List<ClienteType>();
+                }
+
                 var OConvertido = new ResponsePaged<List<ClienteType>>
                 {
                     Succeeded = true,
                     Error = string.Empty,
                     ErrorCode = 0,
                     Data = LstClientes,
-                    Cantidad = LstClientes.Count,
+                    Cantidad = LstClientes?.Count ?? 0,
                     Pagina = 1,
-                    TotalElementos = LstClientes.Count,
-                    TotalPaginas = LstClientes.Count / 5,                    
+                    TotalElementos = LstClientes?.Count ?? 0,
+                    TotalPaginas = LstClientes != null && LstClientes.Count > 0 ? LstClientes.Count / 5 : 0, 
                 };
                 List<ClienteListViewModel> LstTmp = new List<ClienteListViewModel>();
 
@@ -122,7 +127,14 @@ namespace WebApp.Controllers
 
         public IActionResult Create()        
         {
-            return RedirectToAction(nameof(Create), RemoveController(nameof(ClientesController))); //Enviamos a HOME
+            return RedirectToAction(nameof(Create), RemoveController(nameof(ClientesController)));
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            HttpContext.Session.SetString("IdCliente", id?.ToString() ?? "");
+
+            return RedirectToAction(nameof(Edit), RemoveController(nameof(ClientesController)));
         }
 
         public IActionResult Privacy()
@@ -142,6 +154,46 @@ namespace WebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpPost]
+        public async Task<JsonResult> Inactivar(int id)
+        {
+            if (id == 0)
+                return Json(new ConfiguracionMensaje
+                {
+                    TipoMensaje = TipoMensaje.success.ToString(),
+                    Titulo = "ELIMINACIÓN DE CLIENTE",
+                    Mensaje = $"No se ha elegido un cliente."
+                });
+
+            string Token = HttpContext.Session.GetString("JwtSesion") ?? string.Empty;
+
+            Cliente_Service OClientService = new Cliente_Service(_httpClient);
+
+            var response = await OClientService.DeleteCliente(id, Token);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return Json(new ConfiguracionMensaje
+                {
+                    TipoMensaje = TipoMensaje.success.ToString(),
+                    Titulo = "ELIMINACIÓN DE CLIENTE",
+                    Mensaje = $"Cliente fue eliminado con éxito."
+                });
+            }
+            else
+            {
+                return Json(new ConfiguracionMensaje
+                {
+                    TipoMensaje = TipoMensaje.error.ToString(),
+                    Titulo = "ELIMINACIÓN DE CLIENTE",
+                    Mensaje = $"Error al eliminar el cliente"
+                });
+            }
+
+
+        }
+
 
         #region Funciones
         public string RemoveController(string value)

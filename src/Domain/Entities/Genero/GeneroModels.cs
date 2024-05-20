@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AngelValdiviezoWebApi.Domain.Entities.Genero
 {
-    [Table("tblGeneroKrugger", Schema = "dbo")]
+    [Table("tblGeneroLogisticStudio", Schema = "dbo")]
     public class GeneroModels
     {
         [Column("Gen_Id", Order = 0, TypeName = "int")]
