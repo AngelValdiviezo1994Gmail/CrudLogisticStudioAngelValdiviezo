@@ -185,13 +185,13 @@ namespace WebApp.Services
                 string Complemento = string.Concat("UpdateCliente?idCliente=", ObjClienteEdicion.idCliente,
                     "&nombreCliente=", ObjClienteEdicion.nombreCliente, "&apellidoCliente=", ObjClienteEdicion.apellidoCliente,
                     "&numCtaCliente=", ObjClienteEdicion.numCtaCliente, "&saldoCliente=", ObjClienteEdicion.saldoCliente,
-                    "&fechaNacimientoCliente=", ObjClienteEdicion.fechaNacimientoCliente, "&direccionCliente=", ObjClienteEdicion.direccionCliente,
+                    "&fechaNacimientoCliente=", ObjClienteEdicion.fechaNacimientoCliente.ToString("yyyy/MM/dd"), "&direccionCliente=", ObjClienteEdicion.direccionCliente,
                     "&telefonoCliente=", ObjClienteEdicion.telefonoCliente, "&emailCliente=", ObjClienteEdicion.emailCliente,
                     "&idTipoCliente=", ObjClienteEdicion.idTipoCliente, "&idEstadoCivilCliente=", ObjClienteEdicion.idEstadoCivilCliente,
                     "&numIdentificacionCliente=", ObjClienteEdicion.numIdentificacionCliente, "&profesionCliente=", ObjClienteEdicion.profesionCliente,
                     "&idGeneroCliente=", ObjClienteEdicion.idGeneroCliente, "&nacionalidadCliente=", ObjClienteEdicion.nacionalidadCliente,
-                    "&usuarioCreacion=", ObjClienteEdicion.usuarioCreacion, "&fechaCreacion=", ObjClienteEdicion.fechaCreacion,
-                    "&usuarioModificacion=", ObjClienteEdicion.usuarioModificacion, "&fechaModificacion=", ObjClienteEdicion.fechaModificacion);
+                    "&usuarioCreacion=", ObjClienteEdicion.usuarioCreacion, "&fechaCreacion=", ObjClienteEdicion.fechaCreacion?.ToString("yyyy/MM/dd"),
+                    "&usuarioModificacion=", ObjClienteEdicion.usuarioModificacion, "&fechaModificacion=", ObjClienteEdicion.fechaModificacion?.ToString("yyyy/MM/dd"));
 
                 string Ruta = string.Concat(_Conexion.Puerto, _Conexion.ApiCliente, Complemento);
                 /*
