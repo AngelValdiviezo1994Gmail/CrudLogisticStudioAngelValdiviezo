@@ -41,6 +41,10 @@ namespace WebAppCrudAngelValdiviezo.Controllers.Auth
                     || login.password.ToLower() != "1234567")
                 {
                     return StatusCode(505, "Contraseñas incorrectas");
+                } 
+                else
+                {
+                    login.Identificacion = "092222";                    
                 }
 
                 var response = await OAuthService.Login(login);

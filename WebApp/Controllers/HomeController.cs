@@ -125,6 +125,12 @@ namespace WebApp.Controllers
             return View(LstFinal);
         }
 
+        public IActionResult VerDetalle(int? id)
+        {
+            HttpContext.Session.SetString("IdClienteDet", id?.ToString() ?? "");
+            return RedirectToAction(nameof(VerDetalle), RemoveController(nameof(ClientesController)));
+        }
+
         public IActionResult Create()        
         {
             return RedirectToAction(nameof(Create), RemoveController(nameof(ClientesController)));

@@ -232,6 +232,53 @@ namespace WebApp.Controllers.Clientes
             return RedirectToAction(nameof(Index), RemoveController(nameof(HomeController)));
         }
 
+        public async Task<IActionResult> VerDetalle()
+        {
+            string id = HttpContext.Session.GetString("IdClienteDet") ?? "";
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+            string Token = HttpContext.Session.GetString("JwtSesion") ?? string.Empty;
+
+            Cliente_Service OClientService = new Cliente_Service(_httpClient);
+            var response = await OClientService.GetClienteById(Token, id);
+            ClienteType ObjClient = new ClienteType();
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+
+                ObjClient = JsonConvert.DeserializeObject<ResponseType<ClienteType>>(responseData).Data;
+            }
+
+            ClienteViewModel ObjClienteEditViewModel = new ClienteViewModel
+            {
+                ClientApellido = ObjClient.ClientApellido,
+                ClientDireccion = ObjClient.ClientDireccion,
+                ClientEmail = ObjClient.ClientEmail,
+                ClientEstadoCivilId = ObjClient.ClientEstadoCivilId,
+                ClientFechaNacimiento = ObjClient.ClientFechaNacimiento,
+                ClientGeneroId = ObjClient.ClientGeneroId,
+                ClientId = ObjClient.ClientId,
+                ClientNacionalidad = ObjClient.ClientNacionalidad,
+                ClientNombre = ObjClient.ClientNombre,
+                ClientNumCta = ObjClient.ClientNumCta,
+                ClientNumIdentificacion = ObjClient.ClientNumIdentificacion,
+                ClientProfesion = ObjClient.ClientProfesion,
+                ClientSaldo = ObjClient.ClientSaldo,
+                ClientTelefono = ObjClient.ClientTelefono,
+                ClientTipoId = ObjClient.ClientTipoId,
+                FechaCreacion = ObjClient.FechaCreacion,
+                UsuarioCreacion = ObjClient.UsuarioCreacion,
+            };
+
+            ObjClienteEditViewModel.EditMode = 1;
+            CargaListas();
+            return View(ObjClienteEditViewModel);
+        }
+
         [HttpPost]
         public async Task<JsonResult> Inactivar(int id)
         {
